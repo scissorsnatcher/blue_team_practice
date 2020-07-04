@@ -1,2 +1,2 @@
 # blue_team_practice
-Boruvka's algorithm
+Boruvka's algorithm vizualizer
