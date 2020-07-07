@@ -1,3 +1,4 @@
+package simple;
 public class Edge {
 
     private int src;
@@ -5,7 +6,12 @@ public class Edge {
     private int dest;
     private int desrName;
     private int weight;
-
+    
+	public Edge(int i, int j, int k) {
+	    src = i;
+	    dest = j;	 
+	    weight = k;
+	}
     public String getSrcName() {
         return srcName;
     }
@@ -41,7 +47,9 @@ public class Edge {
     public int getWeight() {
         return weight;
     }
-
+    public String getWeightStr() {
+    	return Integer.toString(weight);
+    }
     public void setWeight(int weight) {
         this.weight = weight;
     }
