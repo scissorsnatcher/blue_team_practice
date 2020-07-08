@@ -1,13 +1,17 @@
 package simple;
 
 import java.io.*;
+import java.security.SecureRandom;
+import java.util.Random;
 
 public class Graph implements ILoadable, IChangable{
 
+	//private static final String File = null;
 	private int vertNum;
     private int edgeNum;
     private Edge[] edges;
     private String[] vertices;
+    boolean isolated;
     
     public Graph(){
     	this.vertNum = 0;
@@ -18,32 +22,63 @@ public class Graph implements ILoadable, IChangable{
     
     
     
-    public Graph(int vertNum, int edgeNum){
-    	/*
+    public void generateGraph(int vertNum, int edgeNum){
+    	
         this.vertNum = vertNum;
         this.edgeNum = edgeNum;
         this.vertices = new String[vertNum];
         this.edges = new Edge[edgeNum];
-        int iteration = 0;
-
+        
+        //File f = new File("generating.txt");
+        //f.createNewFile();
+        //FileWriter writer = new FileWriter(f);
+        System.out.println("sdfsffs");
         for(int i = 0; i < this.vertNum; i++){
         	
-        	String str = Integer.toString(i);
-        	System.out.println(str);  
-        	int i1 = Character.getNumericValue(ch);
-            String[] aux = line.split(" ");
+        	int c = i + 65;
+        	char a = (char)c;
+        	String str1 = Integer.toString(i);
+        	String str2 = String.valueOf(a);
+        	String str = str1 + " " + str2;
+        	String[] aux = str.split(" ");
             vertices[Integer.parseInt(aux[0])] = aux[1];
+            System.out.println("sdfsffs");
         }
         for(int i = 0; i < this.edgeNum; i++){
         	
-        	String[] edgeValues = line.split(" ");
-            edges[iteration] = new Edge(Integer.parseInt(edgeValues[0]), Integer.parseInt(edgeValues[1]), Integer.parseInt(edgeValues[2]));
-            iteration++;
+        	SecureRandom rand = new SecureRandom();
+
+        	//String[] edgeValues = line.split(" ");
+        	int src =  rand.nextInt(vertNum);
+        	System.out.println(src);
+        	int dest =  rand.nextInt(vertNum);
+        	System.out.println(dest);
+        	while(src==dest) dest =  rand.nextInt(vertNum);
+        	int weight = rand.nextInt(21);
+        		
+            edges[i] = new Edge(src, dest, weight);
+            System.out.println("sdfsffs");
+       
         }
-        */
+        checkIsolatedVert();
     
     }
+    public void checkIsolatedVert() {
+    	
+    	int k = 0;
+    	int check = 0;
+    	for(int i = 0; i < this.vertNum; i++) {
+    		for(int j = 0; j < this.edgeNum; j++) {
+    			if((i == edges[j].getSrc())||(i == edges[j].getDest())) check++;
+    		}if(check > 0) {k++;check = 0;}
+    	}
+    	if(k != vertNum) isolated = true;
+    	else isolated = false;
+    	
+    }
     
+    
+    ;
     @Override
     public void readFromFile(){
         try {
@@ -75,9 +110,16 @@ public class Graph implements ILoadable, IChangable{
  
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } checkIsolatedVert();
     }
 
+    public void clear() {
+    	this.vertNum = 0;
+        this.edgeNum = 0;
+        this.vertices = new String[100];
+        this.edges = new Edge[100];
+    	
+    }
     
     public void addNode(String a, int x, int y) {
     	
@@ -89,6 +131,7 @@ public class Graph implements ILoadable, IChangable{
     public void addEdge(int x, int y, int z) {
     	edges[edgeNum] = new Edge(x, y, z);
     	this.edgeNum++;
+    	checkIsolatedVert();
     }
 
 	@Override

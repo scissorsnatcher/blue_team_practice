@@ -31,8 +31,7 @@ public class GraphPainter extends JPanel{
 		type = false;
     };
 	public void GraphPaint(Graph g){
-		
-		//this.repaint();
+
 		vertNum = g.getVertNum();
 		edgeNum = g.getEdgeNum();
 	    
@@ -47,6 +46,8 @@ public class GraphPainter extends JPanel{
 		}
 		width = 30;
 		height = 30;
+		
+		
 	}
 	 
 	 public void addNode(String name, int x, int y) {
@@ -65,17 +66,23 @@ public class GraphPainter extends JPanel{
 		    	this.repaint();
 		    	//this.paintComponent(g);
 	 }
-	 public void fillEdge(int i, int j, int k) {
+	 public void clearGraph() {
+		 nodes = new ArrayList<Node>();
+		 edges = new ArrayList<Edge>();
+		 vertNum = 0;
+		 edgeNum = 0;
+		 getGraphics().setColor(Color.WHITE);
+		 getGraphics().clearRect(0, 0, 1000, 1000);
+		 this.repaint();
+	 }
+	 public void fillEdge(int i, int j, int k, Color c) {
 		 
 		 Edge e = new Edge(i, j, k);
 		 Graphics g = this.getGraphics();
-		 
-		 type = true;
-
-		 
+	
 		 FontMetrics f = g.getFontMetrics();
 		 int nodeHeight = Math.max(height, f.getHeight());
-		 g.setColor(Color.red);
+		 g.setColor(c);
 		 
 		 //addEdge(i,j,k);
 		 //addNode(nodes.get(e.getSrc()).name, nodes.get(e.getSrc()).getX(), nodes.get(e.getSrc()).getY());
@@ -108,10 +115,7 @@ public class GraphPainter extends JPanel{
 		FontMetrics f = g.getFontMetrics();
 		int nodeHeight = Math.max(height, f.getHeight());
 		
-		if (!type)
 		g.setColor(Color.black);
-		else 
-		g.setColor(Color.red);
 		
 		for (Edge e : edges) {
 			g.drawLine(nodes.get(e.getSrc()).getX(), nodes.get(e.getSrc()).getY(),nodes.get(e.getDest()).getX(),  nodes.get(e.getDest()).getY());

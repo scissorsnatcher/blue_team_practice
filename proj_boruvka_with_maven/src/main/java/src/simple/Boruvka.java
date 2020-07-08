@@ -1,4 +1,6 @@
 package simple;
+import java.awt.Color;
+import java.awt.List;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -6,15 +8,18 @@ import javax.swing.JButton;
 import gui.GraphPainter;
 
 public class Boruvka{
+	
 	 private int iter;
-	 private Edge[] sortEdges;
-	 public Boruvka(){iter = 1;};
-	 public Edge[] boruvkaMST(Graph graph, GraphPainter GraphPanel, boolean vizualization) {
+	 private ArrayList<Edge> sortEdges;
+	 
+	 public ArrayList<Edge> boruvkaMST(Graph graph, GraphPainter GraphPanel, boolean vizualization) {
 
-	      	iter = 0;
-	      	this.sortEdges = new Edge[100];
+	      
+	     	iter = 0;
 	        int vertNum = graph.getVertNum();
 	        int edgeNum = graph.getEdgeNum();
+	        this.sortEdges = new ArrayList<Edge>();
+	        if (graph.isolated) return sortEdges;
 	        String[] vertNames = graph.getVertNames();
 	        Edge[] edges = graph.getEdges();
 	        
@@ -80,11 +85,11 @@ public class Boruvka{
 	                        
 	                        if (!vizualization) {
 	                        	System.out.println("Edge ("+ vertNames[edges[cheapest[j]].getSrc()] + ", " + vertNames[edges[cheapest[j]].getDest()]+") added to the MST");
-	                        	GraphPanel.fillEdge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight());
+	                        	GraphPanel.fillEdge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight(), Color.RED);
 	                        }
 	                        else {
 	                        	Edge e = new Edge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight());
-	                        	sortEdges[iter] = e;
+	                        	sortEdges.add(e);
 	                        	iter++;
 	                        }
 	                        uniteSubsets(subsets, set1, set2);

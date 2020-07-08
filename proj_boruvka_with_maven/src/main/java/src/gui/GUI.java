@@ -23,7 +23,7 @@ public class GUI extends JFrame{
 
 	
 	private static final long serialVersionUID = 1L;
-	public int x, y, i;
+	public int x, y, i = 0;
 	protected GraphPainter GraphPanel;
 	protected JPanel contents;
 	protected JPanel text;
@@ -46,17 +46,18 @@ public class GUI extends JFrame{
         JPanel text = new JPanel();
         JPanel contents = new JPanel();
     	
-        JButton button1 = new JButton("Читать из файла");
-		JButton button2 = new JButton("Добавить вершину");
-		JButton button3 = new JButton("Добавить ребро");
-		JButton button = new JButton("Очистить");
-		JButton nextButton = new JButton("Вперед");
-		//BoruvkaVizualization runAlg = new BoruvkaVizualization("Вперед"); 
+        JButton button1 = new JButton("Р§РёС‚Р°С‚СЊ СЃ С„Р°Р№Р»Р°");
+		JButton button2 = new JButton("Р”РѕР±Р°РІРёС‚СЊ РІРµСЂС€РёРЅС‹");
+		JButton button3 = new JButton("Р”РѕР±Р°РІРёС‚СЊ СЂРµР±СЂРѕ");
+		JButton button4 = new JButton("РЎРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РіСЂР°С„");
+		JButton button = new JButton("РћС‡РёСЃС‚РёС‚СЊ");
+		JButton nextButton = new JButton("Р’РїРµСЂРµРґ");
+		//BoruvkaVizualization runAlg = new BoruvkaVizualization("пїЅпїЅпїЅпїЅпїЅпїЅ"); 
 		
 		nextButton.setEnabled(false);
 		//runAlg.setEnabled(false);
 
-		String[] messages = {"Применить алгоритм", "Результат", "Визуализация"};
+		String[] messages = {"РџСЂРёРјРµРЅРёС‚СЊ Р°Р»РіРѕСЂРёС‚Рј", "Р РµР·СѓР»СЊС‚Р°С‚", "Р’РёР·СѓР°Р»РёР·Р°С†РёСЏ"};
 		
 		JComboBox<String> cb = new JComboBox<String>(messages);
         cb.setSelectedIndex(0);
@@ -108,15 +109,27 @@ public class GUI extends JFrame{
         		
 			}
 		};
+		ActionListener actionListener4 = new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+	
+				String t = textField.getText();
+				String[] entryValues = t.split(" ");
+				int vertNum = Integer.parseInt(entryValues[0]);
+				int edgeNum = Integer.parseInt(entryValues[1]);
+				graph.clear();
+				graph.generateGraph(vertNum,edgeNum);
+				GraphPanel.GraphPaint(graph);
+				
+        		
+			}
+		};
 		
 		ActionListener actionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GraphPainter NewGraphPanel = new  GraphPainter();
-				  System.out.println("sfdsf");
-		        NewGraphPanel.setBorder(BorderFactory.createRaisedBevelBorder());
-		        NewGraphPanel.setBackground(Color.WHITE);
 				
-				
+				i = 0;
+				GraphPanel.clearGraph();
+				graph.clear();
 				
 			}
 		};
@@ -128,27 +141,24 @@ public class GUI extends JFrame{
         			//runAlg.setEnabled(false);
         			String msg = (String)cb.getSelectedItem();
         			switch(msg) {
-        			case "Результат" :Boruvka boruvka = new Boruvka();boruvka.boruvkaMST(graph, GraphPanel, false); break;
-        			case "Визуализация" : nextButton.setEnabled(true);break;
+        			case "Р РµР·СѓР»СЊС‚Р°С‚" :Boruvka boruvka = new Boruvka();boruvka.boruvkaMST(graph, GraphPanel, false); break;
+        			case "Р’РёР·СѓР°Р»РёР·Р°С†РёСЏ" : nextButton.setEnabled(true);break;
         				//runAlg.boruvkaMST(graph, GraphPanel);
         			}
         	}
 		};
-		i = 0;
 		ActionListener vizualize = new ActionListener() {
 			
         	public void actionPerformed(ActionEvent e) {
-        		//GraphPanel.fillEdge(sorted[i].getSrc(), sorted[i].getDest(), sorted[i].getWeight());
-        		//i++;
+        
         		Boruvka boruvka = new Boruvka();
-        		Edge[] sorted = new Edge[100];
+        		ArrayList<Edge> sorted = new ArrayList<Edge>();
         		sorted = boruvka.boruvkaMST(graph, GraphPanel, true);
-        		//for(Edge r : sorted) {
-        		//	System.out.println(r.getSrc()+","+ r.getDest() + "," + r.getWeight());
-        		//}
-        		GraphPanel.fillEdge(sorted[i].getSrc(), sorted[i].getDest(), sorted[i].getWeight());
-        		i++;
-        			
+        
+        		if(i > sorted.size() - 1) i = 0;
+        		else{GraphPanel.fillEdge(sorted.get(i).getSrc(), sorted.get(i).getDest(), sorted.get(i).getWeight(), Color.RED);i++;
+        		System.out.println(i +"," + sorted.size());
+        		}
         	}
 		};
 		MouseListener ml = new MouseListener() {
@@ -190,6 +200,7 @@ public class GUI extends JFrame{
         button1.addActionListener(actionListener1);
 		button2.addActionListener(actionListener2);
 		button3.addActionListener(actionListener3);
+		button4.addActionListener(actionListener4);
 		button.addActionListener(actionListener);
 		nextButton.addActionListener(vizualize);
 		cb.addActionListener(algorithm);
@@ -197,6 +208,7 @@ public class GUI extends JFrame{
         contents.add(button1);
     	contents.add(button2);
     	contents.add(button3);
+    	contents.add(button4);
     	contents.add(cb);
         text.add(textField);
         text.add(button);
