@@ -26,8 +26,8 @@ public class Graph implements ILoadable, IChangable{
     	
         this.vertNum = vertNum;
         this.edgeNum = edgeNum;
-        this.vertices = new String[vertNum];
-        this.edges = new Edge[edgeNum];
+        this.vertices = new String[100];
+        this.edges = new Edge[100];
         
         //File f = new File("generating.txt");
         //f.createNewFile();
@@ -118,6 +118,7 @@ public class Graph implements ILoadable, IChangable{
         this.edgeNum = 0;
         this.vertices = new String[100];
         this.edges = new Edge[100];
+        isolated = true;
     	
     }
     
@@ -126,11 +127,13 @@ public class Graph implements ILoadable, IChangable{
     	vertices[vertNum] = a;
     	this.vertNum++;
     	System.out.println(vertNum);
+    	checkIsolatedVert();
    
     }
     public void addEdge(int x, int y, int z) {
-    	edges[edgeNum] = new Edge(x, y, z);
+    	
     	this.edgeNum++;
+    	edges[edgeNum-1] = new Edge(x, y, z);
     	checkIsolatedVert();
     }
 
