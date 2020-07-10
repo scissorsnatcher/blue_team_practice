@@ -1,6 +1,8 @@
+package simple;
+
 public interface ILoadable {
 	
-	public void readFromFile();
+	public void readFromFile(String name);
 	public void changeGraph();
 	public void generateGraph();
 	

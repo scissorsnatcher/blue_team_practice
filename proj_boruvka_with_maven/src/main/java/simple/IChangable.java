@@ -1,3 +1,5 @@
+package simple;
+
 public interface IChangable {
 
 	public abstract void AddVertice();
