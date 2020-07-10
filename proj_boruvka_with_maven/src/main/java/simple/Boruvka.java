@@ -14,7 +14,7 @@ public class Boruvka{
 	 private ArrayList<Edge> sortEdges;
 	 public int MSTweight;
 	 
-	 public ArrayList<Edge> boruvkaMST(Graph graph, GraphPainter GraphPanel, boolean vizualization, JTextField textField) {
+	 public ArrayList<Edge> boruvkaMST(Graph graph,  JTextField textField) {//не надо  boolean vizualization
 
 	      
 	     	iter = 0;
@@ -88,15 +88,14 @@ public class Boruvka{
 	                        MSTweight += edges[cheapest[j]].getWeight();
 	                        //System.out.println("Edge ("+ vertNames[edges[cheapest[j]].getSrc()] + ", " + vertNames[edges[cheapest[j]].getDest()]+") added to the MST");
 	                        
-	                        if (!vizualization) {
+
 	                        	System.out.println("Edge ("+ vertNames[edges[cheapest[j]].getSrc()] + ", " + vertNames[edges[cheapest[j]].getDest()]+") added to the MST");
-	                        	GraphPanel.fillEdge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight(), Color.PINK, edges[cheapest[j]].m_flag);
-	                        }
-	                        else {
+	                        	//GraphPanel.fillEdge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight(), Color.PINK, edges[cheapest[j]].m_flag);
+
 	                        	Edge e = new Edge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight());
 	                        	sortEdges.add(e);
-	                        	iter++;
-	                        }
+	                        	iter++;//?
+
 	                        uniteSubsets(subsets, set1, set2);
 		                    numTree--;  
 	                    }
@@ -104,7 +103,7 @@ public class Boruvka{
 	            }
 	           
 	        }
-	        if (!vizualization) textField.setText("Final weight of MST :" + MSTweight);
+	        textField.setText("Final weight of MST :" + MSTweight);
 	        return sortEdges;
 	 }
 	 
