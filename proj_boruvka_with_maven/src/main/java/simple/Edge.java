@@ -6,11 +6,19 @@ public class Edge {
     private int dest;
     private int desrName;
     private int weight;
+    private String weightStr;
+    public boolean m_flag, arc;
+    public Edge flag;
     
 	public Edge(int i, int j, int k) {
 	    src = i;
 	    dest = j;	 
 	    weight = k;
+	    flag = null;
+	    m_flag = false;
+	    flag = null;
+	    arc = false;
+	    weightStr = Integer.toString(weight);
 	}
     public String getSrcName() {
         return srcName;
@@ -48,7 +56,10 @@ public class Edge {
         return weight;
     }
     public String getWeightStr() {
-    	return Integer.toString(weight);
+    	return weightStr;
+    }
+    public  void setWeightStr(String a) {
+    	weightStr = a;
     }
     public void setWeight(int weight) {
         this.weight = weight;

@@ -2,15 +2,14 @@ package simple;
 
 import java.io.*;
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class Graph implements ILoadable, IChangable{
 
 	//private static final String File = null;
 	private int vertNum;
     private int edgeNum;
-    private Edge[] edges;
-    private String[] vertices;
+    private Edge[] edges = null;
+    private String[] vertices = null;
     boolean isolated;
     
     public Graph(){
@@ -20,8 +19,6 @@ public class Graph implements ILoadable, IChangable{
         this.edges = new Edge[100];
     };
     
-    
-    
     public void generateGraph(int vertNum, int edgeNum){
     	
         this.vertNum = vertNum;
@@ -29,9 +26,6 @@ public class Graph implements ILoadable, IChangable{
         this.vertices = new String[100];
         this.edges = new Edge[100];
         
-        //File f = new File("generating.txt");
-        //f.createNewFile();
-        //FileWriter writer = new FileWriter(f);
         System.out.println("sdfsffs");
         for(int i = 0; i < this.vertNum; i++){
         	
@@ -53,15 +47,76 @@ public class Graph implements ILoadable, IChangable{
         	System.out.println(src);
         	int dest =  rand.nextInt(vertNum);
         	System.out.println(dest);
+        	for( int j = 0; j < i;j++) {
+        		if (((edges[j].getSrc() == src) && (edges[j].getDest() == dest))||((edges[j].getDest() == src) && (edges[j].getSrc() == dest))) {
+        			while((src != (edges[j].getSrc())) &&(src != (edges[j].getDest()))) src =  rand.nextInt(vertNum);
+        			while((dest != (edges[j].getSrc())) &&(dest != (edges[j].getDest()))) dest =  rand.nextInt(vertNum);
+        		}
+        	}
         	while(src==dest) dest =  rand.nextInt(vertNum);
-        	int weight = rand.nextInt(21);
+        	int weight = 1 + rand.nextInt(21);
         		
             edges[i] = new Edge(src, dest, weight);
             System.out.println("sdfsffs");
        
         }
+        
         checkIsolatedVert();
     
+    }
+    public void saveGraph(String path) throws IOException {
+    	
+    	File f = new File(path);
+        f.createNewFile();
+        System.out.println(this.vertNum);
+        //@SuppressWarnings("resource")
+        //BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+        //BufferedReader reader = new BufferedReader(new FileReader(f));
+		//FileWriter writer = new FileWriter(f);
+        FileWriter out = new FileWriter(f);
+        
+        String info = Integer.toString(vertNum) + " " + Integer.toString(edgeNum) + "\n";
+        try {
+ 			
+ 			out.write(info);
+ 			
+ 		}
+ 		catch (IOException ex) {
+ 			ex.printStackTrace();
+ 		}
+        
+        for(int i = 0; i < this.vertNum; i++){
+        	
+        	String str1 = Integer.toString(i);
+        	String str2 = String.valueOf(vertices[i]);
+        	String str = str1 + " " + str2 + "\n";
+        	try {
+     			
+     			out.write(str);
+     			
+     		}
+     		catch (IOException ex) {
+     			ex.printStackTrace();
+     		}
+        }
+        for(int i = 0; i < this.edgeNum; i++){
+        	
+        	String str1 = Integer.toString(edges[i].getSrc());
+        	String str2 = String.valueOf(edges[i].getDest());
+        	String str3 = String.valueOf(edges[i].getWeight());
+        	String str = str1 + " " + str2 + " " + str3 + "\n";
+        	try {
+     			
+     			out.write(str);
+     		}
+     		catch (IOException ex) {
+     			ex.printStackTrace();
+     		}
+       
+        }out.close();
+    	
+    	
+    	
     }
     public void checkIsolatedVert() {
     	
@@ -69,7 +124,9 @@ public class Graph implements ILoadable, IChangable{
     	int check = 0;
     	for(int i = 0; i < this.vertNum; i++) {
     		for(int j = 0; j < this.edgeNum; j++) {
-    			if((i == edges[j].getSrc())||(i == edges[j].getDest())) check++;
+    			if(edges[j] != null) {
+    				if((i == edges[j].getSrc())||(i == edges[j].getDest())) check++;
+    			}
     		}if(check > 0) {k++;check = 0;}
     	}
     	if(k != vertNum) isolated = true;
@@ -80,10 +137,11 @@ public class Graph implements ILoadable, IChangable{
     
     ;
     @Override
-    public void readFromFile(){
+    public void readFromFile(String path){
         try {
         	
-        	String path = "test.txt";
+        	//String path = "test.txt";
+        	
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line = br.readLine();
             String[] entryValues = line.split(" ");
@@ -126,16 +184,68 @@ public class Graph implements ILoadable, IChangable{
     	
     	vertices[vertNum] = a;
     	this.vertNum++;
-    	System.out.println(vertNum);
+    	System.out.println("vertNum: " + vertNum);
     	checkIsolatedVert();
    
+    }
+    public void deleteNode() {
+    	vertices[vertNum] = null;
+    	
+    	this.vertNum--;
+    	System.out.println("vertNum: " + vertNum);
+    	checkIsolatedVert();
+    	
+    }
+    public void deleteEdgeNum(int i) {
+    	edges[i] = null;
+    }
+    public void deleteEdges() {
+    	
+    	
+    	for(int i = edgeNum-1; i >= 0;i--) {
+	    	if (edges[i] == null) {
+	    		this.edgeNum--;
+	    	}
+	    	
+	    }
+    	checkIsolatedVert();
+    	
     }
     public void addEdge(int x, int y, int z) {
     	
     	this.edgeNum++;
     	edges[edgeNum-1] = new Edge(x, y, z);
+    	//System.out.println(edgeNum);
     	checkIsolatedVert();
     }
+    public void deleteEdge_() {
+    	/*
+    	for(int i = 0; i < edges.length - 1; i++) {
+	    	if (edges[i] != null) {
+	    		edges[i] = null;
+	    		this.edgeNum--;
+	    		break;
+	    	}
+	    }
+	    */
+    	this.edgeNum--;
+    	System.out.println("edgenum:" + edgeNum);
+    }
+    public void deleteEdge() {
+    	
+    	for(int i = edges.length - 1; i >= 0;i--) {
+	    	if (edges[i] != null) {
+	    		edges[i] = null;
+	    		this.edgeNum--;
+	    		System.out.println("edgenum   sf:" + edgeNum);
+	    		break;
+	    	}
+	    	
+	    }
+    	System.out.println("edgenum   :" + edgeNum);
+    	checkIsolatedVert();
+    }
+    
 
 	@Override
 	public void generateGraph() {

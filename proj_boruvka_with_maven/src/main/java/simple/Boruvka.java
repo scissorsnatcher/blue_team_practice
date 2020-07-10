@@ -4,6 +4,7 @@ import java.awt.List;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import gui.GraphPainter;
 
@@ -11,8 +12,9 @@ public class Boruvka{
 	
 	 private int iter;
 	 private ArrayList<Edge> sortEdges;
+	 public int MSTweight;
 	 
-	 public ArrayList<Edge> boruvkaMST(Graph graph, GraphPainter GraphPanel, boolean vizualization) {
+	 public ArrayList<Edge> boruvkaMST(Graph graph, GraphPainter GraphPanel, boolean vizualization, JTextField textField) {
 
 	      
 	     	iter = 0;
@@ -34,7 +36,7 @@ public class Boruvka{
 	        }
 
 	        int numTree = vertNum;
-	        int MSTweight = 0;
+	        MSTweight = 0;
 
 	        System.out.println("Initializing Boruvka's MST");
 
@@ -62,18 +64,21 @@ public class Boruvka{
 	                    //If they belong to different subsets, check which
 	                    //one is the cheapest
 	                    if (cheapest[set1] == -1 || edges[cheapest[set1]].getWeight() > edges[i].getWeight()) {
+	                    	//System.out.println(edges[cheapest[set1]].getWeight());
 	                        cheapest[set1] = i;
 	                    }
 
 	                    if (cheapest[set2] == -1 || edges[cheapest[set2]].getWeight() > edges[i].getWeight()) {
-	                        cheapest[set2] = i;
+	                    	//System.out.println(edges[cheapest[set1]].getWeight());
+	                    	cheapest[set2] = i;
 	                    }
+	                    
 	                }
 	            }
 
 	            //Add the cheapest edges obtained above to the MST
 	            for (int j = 0; j < vertNum; j++) {
-
+	            	//System.out.println("Number of Treeeeeeeeeeeeees:" + numTree);
 	                //Check if the cheapest for current set exists
 	                if (cheapest[j] != -1) {
 	                    int set1 = find(subsets, edges[cheapest[j]].getSrc());
@@ -85,7 +90,7 @@ public class Boruvka{
 	                        
 	                        if (!vizualization) {
 	                        	System.out.println("Edge ("+ vertNames[edges[cheapest[j]].getSrc()] + ", " + vertNames[edges[cheapest[j]].getDest()]+") added to the MST");
-	                        	GraphPanel.fillEdge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight(), Color.RED);
+	                        	GraphPanel.fillEdge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight(), Color.PINK, edges[cheapest[j]].m_flag);
 	                        }
 	                        else {
 	                        	Edge e = new Edge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight());
@@ -96,10 +101,10 @@ public class Boruvka{
 		                    numTree--;  
 	                    }
 	                }
-	            }//if(vizualization) {iter++;System.out.println(iter);return;
+	            }
 	           
 	        }
-	        System.out.println("Final weight of MST :" + MSTweight);
+	        if (!vizualization) textField.setText("Final weight of MST :" + MSTweight);
 	        return sortEdges;
 	 }
 	 

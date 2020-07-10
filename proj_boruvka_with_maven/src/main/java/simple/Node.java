@@ -9,6 +9,10 @@ public class Node {
 	    y = myY;
 	    name = myName;
 	}
+	public void set(int x_, int y_) {
+    	x = x_;
+    	y = y_;
+    }
 	public int getX() {
         return x;
 	}
@@ -16,5 +20,6 @@ public class Node {
     public int getY() {
         return y;
     }
+    
     
 }
