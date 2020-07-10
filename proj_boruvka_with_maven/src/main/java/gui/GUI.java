@@ -40,10 +40,6 @@ public class GUI extends JFrame{
 	private int vert;
 	private String s;
 	
-	boolean f1 = false;
-	ArrayList<Edge> sorted1 = new ArrayList<Edge>();//вместо sorted внутри ждущего объекта для обычного алгоритма и алгоритма по шагам
-	int weight_mst =0;
-	
 	public GUI(){
 		
 		super("GraphicDisplay");
@@ -79,17 +75,11 @@ public class GUI extends JFrame{
 		JButton throwoff = new JButton("Сбросить");
 		throwoff.setBackground(Color. LIGHT_GRAY);
 		throwoff.setForeground(Color. BLACK);
-		
-		JButton backButton = new JButton("Назад");
-		backButton.setBackground(Color. LIGHT_GRAY);
-		backButton.setForeground(Color. BLACK);
-		
 		JButton nextButton = new JButton("Вперед");
 		 nextButton.setBackground(Color. LIGHT_GRAY);
 		 nextButton.setForeground(Color. BLACK);
 		
 		nextButton.setEnabled(false);
-		backButton.setEnabled(false);
 
 		String[] messages = {"Применить алгоритм", "Результат", "Визуализация"};
 		String[] change_mes = {"Удалить", "Удалить вершину", "Удалить ребро", "Очистить полотно"};
@@ -118,7 +108,10 @@ public class GUI extends JFrame{
 	    myPanel1.add(field4);
 	    myPanel1.add(label5);
 	    myPanel1.add(field5);
-	  
+	   
+	    
+	       
+		
 		JComboBox<String> cb = new JComboBox<String>(messages);
 		cb.setBackground(Color. PINK);
 		cb.setForeground(Color. BLACK);
@@ -134,28 +127,24 @@ public class GUI extends JFrame{
   
         
         JTextField textField = new JTextField();
-        textField.setColumns(35);
+        textField.setColumns(40);
       
         ActionListener sbr = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				i = 0;
-				for(int j = 0; j < graph.getEdges().length; j++) {
-				//for(Edge e1: graph.getEdges()) {
-					if (graph.getEdges()[j] != null) {
-						GraphPanel.fillEdge(graph.getEdges()[j].getSrc(), graph.getEdges()[j].getDest(),graph.getEdges()[j].getWeight(), Color.BLACK, graph.getEdges()[i].arc);
+				for(Edge e1: graph.getEdges()) {
+					GraphPanel.fillEdge(e1.getSrc(), e1.getDest(), e1.getWeight(), Color.BLACK, e1.arc);
 				}
-				}
-				textField.setText("");
-				
+				textField.setText(" ");
 				
 			}
 		};
         ActionListener actionListener5 = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//String t = textField.getText();
-				//String[] entryValues = t.split(" ");
+				String t = textField.getText();
+				String[] entryValues = t.split(" ");
 				GraphPanel.removeNode();
 				graph.deleteNode();
 				
@@ -247,29 +236,10 @@ public class GUI extends JFrame{
         	public void actionPerformed(ActionEvent e) {
         		
         			nextButton.setEnabled(false);
-        			backButton.setEnabled(false);
         			//runAlg.setEnabled(false);
         			String msg = (String)cb.getSelectedItem();
         			switch(msg) {
-        			case "Результат" :
-        				if(f1 == false){Boruvka boruvka = new Boruvka();sorted1 = boruvka.boruvkaMST(graph,  textField);
-
-        					for(int i = 0; i < sorted1.size();i++){
-        						if (sorted1.get(i) != null) {
-        							GraphPanel.fillEdge(sorted1.get(i).getSrc(), sorted1.get(i).getDest(), sorted1.get(i).getWeight(), Color.PINK, sorted1.get(i).arc);
-							}}
-							break;
-        				}
-        				else{
-        					//Мы уже прочитали граф через визуализацию
-							//надо только закрасить ребра в другой цвет
-							for(int i = 0; i < sorted1.size();i++){
-								if (sorted1.get(i) != null) {
-								GraphPanel.fillEdge(sorted1.get(i).getSrc(), sorted1.get(i).getDest(), sorted1.get(i).getWeight(), Color.PINK, sorted1.get(i).arc);
-							}}
-							break;
-
-						}
+        			case "Результат" :Boruvka boruvka = new Boruvka();boruvka.boruvkaMST(graph, GraphPanel, false, textField); break;
         			case "Визуализация" : nextButton.setEnabled(true);break;
         				//runAlg.boruvkaMST(graph, GraphPanel);
         			}
@@ -349,54 +319,6 @@ public class GUI extends JFrame{
 			
         	public void actionPerformed(ActionEvent e) {
         
-<<<<<<< HEAD
-        		if(!f1) {
-					Boruvka boruvka = new Boruvka();
-					sorted1 = boruvka.boruvkaMST(graph, textField);
-					weight_mst = boruvka.MSTweight;
-					f1 = true;
-
-				}
-
-
-        		if(i > sorted1.size() - 1) i = 0;
-        		else{
-        			if (sorted1.get(i) != null) {
-        				GraphPanel.fillEdge(sorted1.get(i).getSrc(), sorted1.get(i).getDest(), sorted1.get(i).getWeight(), Color.RED, sorted1.get(i).arc);
-        				i++;
-        				backButton.setEnabled(true);
-        				textField.setText("Edge (" + graph.getVertNames()[sorted1.get(i-1).getSrc()] + ", " + graph.getVertNames()[sorted1.get(i-1).getDest()] +") added to the MST");
-        			}
-        			System.out.println(i + ", " +  sorted1.size());
-        		}
-        		if(i == sorted1.size()){ textField.setText("Final weight of MST: " + weight_mst);
-        		                         nextButton.setEnabled(false);}
-        		}
-		};
-		
-		ActionListener vizualize_step_back = new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-
-
-
-				if(i > 0 ) {
-					i--;
-
-					if (sorted1.get(i) != null) {	
-					GraphPanel.fillEdge(sorted1.get(i).getSrc(), sorted1.get(i).getDest(), sorted1.get(i).getWeight(), Color.BLACK, sorted1.get(i).arc);
-					textField.setText("Edge (" + graph.getVertNames()[sorted1.get(i).getSrc()] + ", " + graph.getVertNames()[sorted1.get(i).getDest()] +") added to the MST");
-				}}
-				if( i == 0){
-					backButton.setEnabled(false);
-				}
-				if( i < sorted1.size()){
-					nextButton.setEnabled(true);
-				}
-
-
-			}
-=======
         		Boruvka boruvka = new Boruvka();
         		ArrayList<Edge> sorted = new ArrayList<Edge>();
         		sorted = boruvka.boruvkaMST(graph, GraphPanel, true, textField);
@@ -405,9 +327,8 @@ public class GUI extends JFrame{
         		else{GraphPanel.fillEdge(sorted.get(i).getSrc(), sorted.get(i).getDest(), sorted.get(i).getWeight(), Color.RED, sorted.get(i).arc);i++;
         		textField.setText("Edge (" + graph.getVertNames()[sorted.get(i-1).getSrc()] + ", " + graph.getVertNames()[sorted.get(i-1).getDest()] +") added to the MST"); 
         		}System.out.println(i + ", " +  sorted.size());
-        		if(i == sorted.size()) {textField.setText("Final weight of MST: " + boruvka.MSTweight); nextButton.setEnabled(false);};
+        		if(i == sorted.size()) textField.setText("Final weight of MST: " + boruvka.MSTweight);
         	}
->>>>>>> 0f5bd77d90c540e04151efdf52589d9e8d9473f0
 		};
 		
 		MouseAdapter ml = new MouseAdapter() {
@@ -459,7 +380,7 @@ public class GUI extends JFrame{
 		author.setBounds(440, 513, 400, 15);
 		add(author);
 		
-        	button1.addActionListener(actionListener1);
+        button1.addActionListener(actionListener1);
 		button2.addActionListener(actionListener2);
 		button3.addActionListener(actionListener3);
 		button4.addActionListener(actionListener4);
@@ -467,7 +388,6 @@ public class GUI extends JFrame{
 		button.addActionListener(actionListener);
 		throwoff.addActionListener(sbr);
 		nextButton.addActionListener(vizualize);
-		backButton.addActionListener(vizualize_step_back);
 		cb.addActionListener(algorithm);
 		cb1.addActionListener(change);
 		cb2.addActionListener(saveGr);
@@ -485,7 +405,6 @@ public class GUI extends JFrame{
         text.add(throwoff);
         //text.add(button);
         text.add(cb);
-        text.add(backButton);
         text.add(nextButton);
         //text.add(runAlg);
         
