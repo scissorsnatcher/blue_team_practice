@@ -349,6 +349,7 @@ public class GUI extends JFrame{
 			
         	public void actionPerformed(ActionEvent e) {
         
+<<<<<<< HEAD
         		if(!f1) {
 					Boruvka boruvka = new Boruvka();
 					sorted1 = boruvka.boruvkaMST(graph, textField);
@@ -395,6 +396,18 @@ public class GUI extends JFrame{
 
 
 			}
+=======
+        		Boruvka boruvka = new Boruvka();
+        		ArrayList<Edge> sorted = new ArrayList<Edge>();
+        		sorted = boruvka.boruvkaMST(graph, GraphPanel, true, textField);
+        
+        		if(i > sorted.size() - 1) i = 0;
+        		else{GraphPanel.fillEdge(sorted.get(i).getSrc(), sorted.get(i).getDest(), sorted.get(i).getWeight(), Color.RED, sorted.get(i).arc);i++;
+        		textField.setText("Edge (" + graph.getVertNames()[sorted.get(i-1).getSrc()] + ", " + graph.getVertNames()[sorted.get(i-1).getDest()] +") added to the MST"); 
+        		}System.out.println(i + ", " +  sorted.size());
+        		if(i == sorted.size()) {textField.setText("Final weight of MST: " + boruvka.MSTweight); nextButton.setEnabled(false);};
+        	}
+>>>>>>> 0f5bd77d90c540e04151efdf52589d9e8d9473f0
 		};
 		
 		MouseAdapter ml = new MouseAdapter() {
@@ -446,7 +459,7 @@ public class GUI extends JFrame{
 		author.setBounds(440, 513, 400, 15);
 		add(author);
 		
-        button1.addActionListener(actionListener1);
+        	button1.addActionListener(actionListener1);
 		button2.addActionListener(actionListener2);
 		button3.addActionListener(actionListener3);
 		button4.addActionListener(actionListener4);
