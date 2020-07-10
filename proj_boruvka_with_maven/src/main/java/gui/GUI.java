@@ -327,7 +327,7 @@ public class GUI extends JFrame{
         		else{GraphPanel.fillEdge(sorted.get(i).getSrc(), sorted.get(i).getDest(), sorted.get(i).getWeight(), Color.RED, sorted.get(i).arc);i++;
         		textField.setText("Edge (" + graph.getVertNames()[sorted.get(i-1).getSrc()] + ", " + graph.getVertNames()[sorted.get(i-1).getDest()] +") added to the MST"); 
         		}System.out.println(i + ", " +  sorted.size());
-        		if(i == sorted.size()) textField.setText("Final weight of MST: " + boruvka.MSTweight);
+        		if(i == sorted.size()) {textField.setText("Final weight of MST: " + boruvka.MSTweight); nextButton.setEnabled(false);};
         	}
 		};
 		
@@ -380,7 +380,7 @@ public class GUI extends JFrame{
 		author.setBounds(440, 513, 400, 15);
 		add(author);
 		
-        button1.addActionListener(actionListener1);
+        	button1.addActionListener(actionListener1);
 		button2.addActionListener(actionListener2);
 		button3.addActionListener(actionListener3);
 		button4.addActionListener(actionListener4);
