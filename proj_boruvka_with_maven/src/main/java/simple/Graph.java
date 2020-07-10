@@ -3,6 +3,7 @@ package simple;
 import java.io.*;
 import java.security.SecureRandom;
 
+
 public class Graph implements ILoadable, IChangable{
 
 	//private static final String File = null;
@@ -18,8 +19,9 @@ public class Graph implements ILoadable, IChangable{
         this.vertices = new String[100];
         this.edges = new Edge[100];
     };
-    
-    public void generateGraph(int vertNum, int edgeNum){
+
+
+    public void generateGraph(int vertNum, int edgeNum) {
     	
         this.vertNum = vertNum;
         this.edgeNum = edgeNum;
@@ -160,9 +162,7 @@ public class Graph implements ILoadable, IChangable{
             while((line = br.readLine()) != null){
                 String[] edgeValues = line.split(" ");
                 edges[iteration] = new Edge(Integer.parseInt(edgeValues[0]), Integer.parseInt(edgeValues[1]), Integer.parseInt(edgeValues[2]));
-                //edges[iteration].setSrc(Integer.parseInt(edgeValues[0]));
-                //edges[iteration].setDest(Integer.parseInt(edgeValues[1]));
-                //edges[iteration].setWeight(Integer.parseInt(edgeValues[2]));
+
                 iteration++;
             }
  

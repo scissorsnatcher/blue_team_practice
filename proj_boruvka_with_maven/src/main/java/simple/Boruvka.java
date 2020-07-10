@@ -13,13 +13,13 @@ public class Boruvka{
 	 private int iter;
 	 private ArrayList<Edge> sortEdges;
 	 public int MSTweight;
-	 
+
 	 public ArrayList<Edge> boruvkaMST(Graph graph, GraphPainter GraphPanel, boolean vizualization, JTextField textField) {
 
 	      
 	     	iter = 0;
-	        int vertNum = graph.getVertNum();
-	        int edgeNum = graph.getEdgeNum();
+	        int vertNum = graph.getVertNum(); // tops
+	        int edgeNum = graph.getEdgeNum(); // edge
 	        this.sortEdges = new ArrayList<Edge>();
 	        if (graph.isolated) return sortEdges;
 	        String[] vertNames = graph.getVertNames();
