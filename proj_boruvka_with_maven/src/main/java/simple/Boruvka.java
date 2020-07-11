@@ -18,41 +18,54 @@ public class Boruvka{
 
 	      
 	     	iter = 0;
-	        int vertNum = graph.getVertNum();
-	        int edgeNum = graph.getEdgeNum();
+	        int vertNum = graph.factVertNum;
+	        int edgeNum = graph.factEdgeNum;
 	        this.sortEdges = new ArrayList<Edge>();
-	        if (graph.isolated) return sortEdges;
+	        System.out.println(graph.factVertNum + " " + graph.factEdgeNum + " " + graph.getVertNum() + " " + graph.getEdgeNum());
+	        if (graph.isolated) {System.out.println (true); return sortEdges;}
+	        else {System.out.println(false);};
 	        String[] vertNames = graph.getVertNames();
 	        Edge[] edges = graph.getEdges();
 	        
 	        Subset[] subsets = new Subset[vertNum];
 	        int[] cheapest = new int[vertNum];
-
-	        for (int i = 0; i < vertNum; i++) {
-	            subsets[i] = new Subset();
-	            subsets[i].setParent(i);
-	            subsets[i].setRank(0);
-	            cheapest[i] = -1;
+	        for(int i = 0; i < edgeNum; i++) {
+	        		if(edges[i]!=null)
+	        		System.out.println(edges[i].getDest() + " " + edges[i].getSrc());
+	        		else
+	        		System.out.println("null");
 	        }
-
-	        int numTree = vertNum;
+	        System.out.println(vertNum + edgeNum + "fdsgdg");
+	        int k = 0;
+	        for (int i = 0; i < vertNum; i++) {
+	        	if ( vertNames[i] != "0") {
+	        		subsets[i] = new Subset();
+	        		subsets[i].setParent(i);
+	        		subsets[i].setRank(0);
+	        		cheapest[i] = -1;
+	        	}else {subsets[i] = null;cheapest[i] = -2;k++;}
+	        }
+	    
+	        int numTree = vertNum - k;
+	        k = 0;
 	        MSTweight = 0;
 
-	        System.out.println("Initializing Boruvka's MST");
-
-	        //It will run until the MST is the only tree left
+	        System.out.println("Initializing Boruvka's MST" + numTree);
+	        
 	        while (numTree > 1) {
 	            System.out.println("Number of Trees:" + numTree);
-
+	    
 	            //Reset the cheapest values every iteration
 	            for (int i = 0; i < vertNum; i++) {
-	                cheapest[i] = -1;
+	            	 if(cheapest[i] != -2) cheapest[i] = -1;
+	            	 
 	            }
-
+	         
 	            //Iterate over all edges to find the cheapest
 	            //edge of every subtree
 	            for (int i = 0; i < edgeNum; i++) {
-
+	            	if (edges[i]!= null) {
+	            	if ( edges[i].getSrc() != -1) {
 	                //Find the subsets of the corners of the edge
 	                int set1 = find(subsets, edges[i].getSrc());
 	                int set2 = find(subsets, edges[i].getDest());
@@ -64,50 +77,51 @@ public class Boruvka{
 	                    //If they belong to different subsets, check which
 	                    //one is the cheapest
 	                    if (cheapest[set1] == -1 || edges[cheapest[set1]].getWeight() > edges[i].getWeight()) {
-	                    	//System.out.println(edges[cheapest[set1]].getWeight());
+	                    	
 	                        cheapest[set1] = i;
 	                    }
 
 	                    if (cheapest[set2] == -1 || edges[cheapest[set2]].getWeight() > edges[i].getWeight()) {
-	                    	//System.out.println(edges[cheapest[set1]].getWeight());
+	                    	
 	                    	cheapest[set2] = i;
 	                    }
-	                    
+	                }
 	                }
 	            }
-
+	            }
 	            //Add the cheapest edges obtained above to the MST
 	            for (int j = 0; j < vertNum; j++) {
-	            	//System.out.println("Number of Treeeeeeeeeeeeees:" + numTree);
+	            	if (vertNames[j] != "0") {
+	            	
 	                //Check if the cheapest for current set exists
-	                if (cheapest[j] != -1) {
-	                    int set1 = find(subsets, edges[cheapest[j]].getSrc());
-	                    int set2 = find(subsets, edges[cheapest[j]].getDest());
-
+	            	
+	                if ((cheapest[j] != -1) && (cheapest[j] != -2)) {
+	                	
+	                	int set1 = find(subsets, edges[cheapest[j]].getSrc());
+	                	int set2 = find(subsets, edges[cheapest[j]].getDest());
+	                	
+	                
+	                
+	                	if (edges[cheapest[j]].getSrc() != -1) {
 	                    if(set1 != set2){
 	                        MSTweight += edges[cheapest[j]].getWeight();
-	                        //System.out.println("Edge ("+ vertNames[edges[cheapest[j]].getSrc()] + ", " + vertNames[edges[cheapest[j]].getDest()]+") added to the MST");
-	                        
-	                        //if (!vizualization) {
-	                        	System.out.println("Edge ("+ vertNames[edges[cheapest[j]].getSrc()] + ", " + vertNames[edges[cheapest[j]].getDest()]+") added to the MST");
-	                        	//GraphPanel.fillEdge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight(), Color.PINK, edges[cheapest[j]].m_flag);
-	                       // }
-	                       // else {
-	                        	Edge e = new Edge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight());
-	                        	sortEdges.add(e);
-	                        	iter++;
-	                        //}
+	                        System.out.println("Edge ("+ vertNames[edges[cheapest[j]].getSrc()] + ", " + vertNames[edges[cheapest[j]].getDest()]+") added to the MST");
+	                        	
+	                        Edge e = new Edge(edges[cheapest[j]].getSrc(), edges[cheapest[j]].getDest(), edges[cheapest[j]].getWeight());
+	                        sortEdges.add(e);
+	                        iter++;
+	               
 	                        uniteSubsets(subsets, set1, set2);
 		                    numTree--;  
 	                    }
 	                }
+	                }	                
 	            }
-	           
+	            }
 	        }
 	        textField.setText("Final weight of MST :" + MSTweight);
 	        return sortEdges;
-	 }
-	 
+}
 	    //Method to find the set of a vert
 	    //It utilizes path compression technique
 	    private int find(Subset[] subsets, int vert) {

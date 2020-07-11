@@ -64,4 +64,9 @@ public class Edge {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+    public void del(int a, int b, int c) {
+    	src = a;
+    	dest = b;
+    	weight = c;
+    }
 }

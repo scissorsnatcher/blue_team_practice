@@ -2,12 +2,15 @@ package simple;
 
 import java.io.*;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 
 public class Graph implements ILoadable, IChangable{
 
 	//private static final String File = null;
 	private int vertNum;
     private int edgeNum;
+    public int factVertNum;
+    public int factEdgeNum;
     private Edge[] edges = null;
     private String[] vertices = null;
     boolean isolated;
@@ -15,6 +18,8 @@ public class Graph implements ILoadable, IChangable{
     public Graph(){
     	this.vertNum = 0;
         this.edgeNum = 0;
+        factVertNum = 0;
+        factEdgeNum = 0;
         this.vertices = new String[100];
         this.edges = new Edge[100];
     };
@@ -23,6 +28,8 @@ public class Graph implements ILoadable, IChangable{
     	
         this.vertNum = vertNum;
         this.edgeNum = edgeNum;
+        this.factVertNum = vertNum;
+        this.factEdgeNum = edgeNum;
         this.vertices = new String[100];
         this.edges = new Edge[100];
         
@@ -122,8 +129,8 @@ public class Graph implements ILoadable, IChangable{
     	
     	int k = 0;
     	int check = 0;
-    	for(int i = 0; i < this.vertNum; i++) {
-    		for(int j = 0; j < this.edgeNum; j++) {
+    	for(int i = 0; i < this.factVertNum; i++) {
+    		for(int j = 0; j < this.factEdgeNum; j++) {
     			if(edges[j] != null) {
     				if((i == edges[j].getSrc())||(i == edges[j].getDest())) check++;
     			}
@@ -146,7 +153,9 @@ public class Graph implements ILoadable, IChangable{
             String line = br.readLine();
             String[] entryValues = line.split(" ");
             this.vertNum = Integer.parseInt(entryValues[0]);
+            this.factVertNum = Integer.parseInt(entryValues[0]);
             this.edgeNum = Integer.parseInt(entryValues[1]);
+            this.factEdgeNum = Integer.parseInt(entryValues[1]);
             this.vertices = new String[100];
             this.edges = new Edge[100];
             int iteration = 0;
@@ -174,6 +183,8 @@ public class Graph implements ILoadable, IChangable{
     public void clear() {
     	this.vertNum = 0;
         this.edgeNum = 0;
+        this.factVertNum = 0;
+        this.factEdgeNum = 0;
         this.vertices = new String[100];
         this.edges = new Edge[100];
         isolated = true;
@@ -182,23 +193,65 @@ public class Graph implements ILoadable, IChangable{
     
     public void addNode(String a, int x, int y) {
     	
-    	vertices[vertNum] = a;
+    	vertices[factVertNum] = a;
     	this.vertNum++;
-    	System.out.println("vertNum: " + vertNum);
+    	this.factVertNum++;
+    	//System.out.println("vertNum: " + vertNum);
+    	//System.out.println(vertices[6]);
+    	//System.out.println(vertices[7]);
+    	//System.out.println(vertices[8]);
+    	//System.out.println(vertices[9]);
     	checkIsolatedVert();
    
     }
-    public void deleteNode() {
-    	vertices[vertNum] = null;
+    public void deleteNode(Node n) {
     	
-    	this.vertNum--;
-    	System.out.println("vertNum: " + vertNum);
+    	for (int i = 0; i < vertices.length ; i++) {
+    		if (vertices[i] == n.name) {
+    			vertices[i] = "0";
+    			System.out.println("delete vert: " + vertices[i]);
+    			this.vertNum--;
+    			break;
+    		}
+    	}
+    	//System.out.println("vertNum: " + vertNum);
     	checkIsolatedVert();
     	
     }
-    public void deleteEdgeNum(int i) {
-    	edges[i] = null;
+    //public void deleteEdgeNum(int i) {
+    	//edges[i] = null;
+    	//System.out.println("edgeNum: " + edgeNum);
+   // }
+    public void reduceEdgeNum(int n, ArrayList<Edge> list) {
+    	
+    	
+    	for(int i = n; i > 0; i--) {
+    		for(int j = 0; j < factEdgeNum; j++) {
+    			if(edges[j] != null) {
+    			if ((edges[j].getSrc() == list.get(list.size() - i).getSrc()) && (edges[j].getDest() ==  list.get(list.size() - i).getDest())) {
+    				edges[j].del(-1, -1, -1); 
+    				this.edgeNum--;
+    			}
+    		}
+	    }
+    	}
+	    for(int j = 0; j < factEdgeNum; j++) {
+			System.out.println("dfsfsdfsadf5216: " + edges[j].getSrc() + edges[j].getDest());
+		}checkIsolatedVert();
     }
+    /*
+    public void removeEdge(Edge e) {
+    	
+    	for(int i = 0; i < edges.length; i++) {
+	    	if ((edges[i].getSrc() == e.getSrc()) && (edges[i].getDest() == e.getDest()) && (edges[i].getWeight() == e.getWeight())) {
+	    		edges[i].del(-1, -1, -1); 
+	    		this.edgeNum--;
+	    		break;
+	    	}
+	    }
+    }
+    */
+    /*
     public void deleteEdges() {
     	
     	
@@ -211,13 +264,16 @@ public class Graph implements ILoadable, IChangable{
     	checkIsolatedVert();
     	
     }
+    */
     public void addEdge(int x, int y, int z) {
     	
+    	edges[edgeNum] = new Edge(x, y, z);
     	this.edgeNum++;
-    	edges[edgeNum-1] = new Edge(x, y, z);
+    	this.factEdgeNum++;
     	//System.out.println(edgeNum);
     	checkIsolatedVert();
     }
+    /*
     public void deleteEdge_() {
     	/*
     	for(int i = 0; i < edges.length - 1; i++) {
@@ -228,24 +284,27 @@ public class Graph implements ILoadable, IChangable{
 	    	}
 	    }
 	    */
-    	this.edgeNum--;
-    	System.out.println("edgenum:" + edgeNum);
-    }
-    public void deleteEdge() {
-    	
-    	for(int i = edges.length - 1; i >= 0;i--) {
-	    	if (edges[i] != null) {
-	    		edges[i] = null;
-	    		this.edgeNum--;
-	    		System.out.println("edgenum   sf:" + edgeNum);
-	    		break;
-	    	}
-	    	
-	    }
-    	System.out.println("edgenum   :" + edgeNum);
-    	checkIsolatedVert();
-    }
+    	//this.edgeNum--;
+    	//System.out.println("edgenum:" + edgeNum);
     
+   // public void deleteEdge() {
+    //	
+    //	for(int i = edges.length - 1; i >= 0;i--) {
+	  //  	if (edges[i] != null) {
+	    //		edges[i] = null;
+	    //		this.edgeNum--;
+	    	//	System.out.println("edgenum   sf:" + edgeNum);
+	    		//break;
+	    	//}
+	    	
+	    //}
+    	//System.out.println("edgenum   :" + edgeNum);
+    	//checkIsolatedVert();
+    //}
+    
+    public void change_weight(int i, int value) {
+    	edges[i].setWeight(value);
+    }
 
 	@Override
 	public void generateGraph() {
@@ -293,8 +352,6 @@ public class Graph implements ILoadable, IChangable{
 	    public int getEdgeNum() {
 	        return edgeNum;
 	    }
-
-
 
 		@Override
 		public void changeGraph() {

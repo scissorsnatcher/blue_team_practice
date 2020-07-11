@@ -1,9 +1,13 @@
 package simple;
 
 public class Node {
-	private int x, y;
+	private int x = 30 , y = 30;
 	public String name;
 	
+	public Node() {};
+	public Node(String a) {
+		name = a;
+	}
 	public Node(String myName, int myX, int myY) {
 	    x = myX;
 	    y = myY;
