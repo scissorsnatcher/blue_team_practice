@@ -21,8 +21,41 @@
   <component name="ChangeListManager">
     <list default="true" id="4c19a0fb-ec3a-4ae9-8d0b-df475318def1" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/test" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/META-INF/proj_boruvka_with_maven.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$10.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$11.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$12.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$13.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$5.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$6.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$7.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$8.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI$9.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GUI.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/gui/GraphPainter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/Boruvka.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/Edge.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/Graph.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/GraphTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/IChangable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/ILoadable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/Main$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/Node.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/simple/Subset.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test1" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/simple/Boruvka.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/simple/Boruvka.java" afterDir="false" />
@@ -46,6 +79,7 @@
       </list>
     </option>
   </component>
+<<<<<<< Updated upstream
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -55,19 +89,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-252" />
+    <option name="y" value="-13" />
+    <option name="width" value="1750" />
+    <option name="height" value="980" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+>>>>>>> Stashed changes
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+<<<<<<< Updated upstream
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+=======
+>>>>>>> Stashed changes
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1593982574891" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
+<<<<<<< Updated upstream
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+>>>>>>> Stashed changes
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -81,6 +130,7 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+<<<<<<< Updated upstream
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\github\blue_team_practice\proj_boruvka_with_maven" />
       <recent name="F:\github\blue_team_practice\proj_boruvka_with_maven\src\main\java\simple" />
@@ -96,11 +146,28 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+=======
+  </component>
+  <component name="RunManager" selected="JUnit.TestProgram">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="simple.Main" />
+      <module name="proj_boruvka_with_maven" />
+>>>>>>> Stashed changes
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< Updated upstream
     <configuration name="Testsclass1" type="JUnit" factoryName="JUnit">
+=======
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="simple.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestProgram" type="JUnit" factoryName="JUnit">
+>>>>>>> Stashed changes
       <module name="proj_boruvka_with_maven" />
       <useClassPathOnly />
       <option name="PACKAGE_NAME" value="simple" />
@@ -114,6 +181,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
+<<<<<<< Updated upstream
       <item itemvalue="JUnit.Testsclass1" />
     </list>
     <recent_temporary>
@@ -121,6 +189,10 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+=======
+      <item itemvalue="JUnit.TestProgram" />
+    </list>
+>>>>>>> Stashed changes
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -143,6 +215,7 @@
     <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+<<<<<<< Updated upstream
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -226,5 +299,30 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1594358770656" />
+=======
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594539083070">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1594539083070" />
+    <state x="412" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1594539061501">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="412" y="154" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1594539061501" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1594538938706">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1594538938706" />
+    <state x="387" y="256" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1594538933165">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="387" y="256" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1366.728@0.0.1366.728" timestamp="1594538933165" />
+    <state x="447" y="32" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1594538990766">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="447" y="32" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1366.728@0.0.1366.728" timestamp="1594538990766" />
+>>>>>>> Stashed changes
   </component>
 </project>
