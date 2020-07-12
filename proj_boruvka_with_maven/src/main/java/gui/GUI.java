@@ -139,7 +139,7 @@ public class GUI extends JFrame{
   
         
         JTextField textField = new JTextField();
-        textField.setColumns(35);
+        textField.setColumns(30);
       
         ActionListener sbr = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
