@@ -1,7 +1,7 @@
 package simple;
 
 public class Node {
-	private int x = 30 , y = 30;
+	private int x, y;
 	public String name;
 	
 	public Node() {};
