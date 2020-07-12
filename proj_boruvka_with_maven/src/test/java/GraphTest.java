@@ -1,10 +1,9 @@
-package simple;
-
 import java.io.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import simple.Graph;
 
 import static org.junit.Assert.*;
 
